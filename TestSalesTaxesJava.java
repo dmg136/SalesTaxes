@@ -1,6 +1,8 @@
 import org.junit.Test;
 import org.junit.Assert;
 import java.io.*;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 public class TestSalesTaxesJava {
 
@@ -12,7 +14,10 @@ public class TestSalesTaxesJava {
 	@Test
 	public void testOneItemNonExempt() {
 		String oneItem = "1 music CD at 14.99";
-		Assert.assertEquals(SalesTaxesJava.calculateItem(oneItem), 16.49, 0.00);
+		BigDecimal[] bd = SalesTaxesJava.calculateItem(oneItem);
+		
+		Assert.assertEquals(bd[0].doubleValue(), 1.50, 0.00);
+		Assert.assertEquals(bd[1].doubleValue(), 16.49, 0.00);
 		
 	}
 	
@@ -30,7 +35,10 @@ public class TestSalesTaxesJava {
 	@Test
 	public void testOneItemImport() {
 		String oneItem = "1 imported bottle of perfume at 27.99";
-		Assert.assertEquals(SalesTaxesJava.calculateItem(oneItem), 32.19, 0.00);
+		BigDecimal[] bd = SalesTaxesJava.calculateItem(oneItem);
+		
+		Assert.assertEquals(bd[0].doubleValue(), 4.20, 0.00);
+		Assert.assertEquals(bd[1].doubleValue(), 32.19, 0.00);
 	}
 	
 	@Test

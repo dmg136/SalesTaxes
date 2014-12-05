@@ -7,12 +7,16 @@ public final class SalesTaxesJava {
 	static int salesTax = 10;
 	static int importTax = 5;
 	
-	public static double calculateItem(String item) {
+	public static BigDecimal[] calculateItem(String item) {
+		
+		System.out.println("==================");
+		
+		/* first element = tax amount, second element = total amount */
+		BigDecimal[] bd = new BigDecimal[2];
+		BigDecimal totalTaxes;
 		
 		Pattern p = Pattern.compile("[0-9]+[.][0-9]+");
 		Matcher m = p.matcher(item);
-		
-		
 		
 		if (m.find()) {
 			String strAmount = m.group();
@@ -26,6 +30,9 @@ public final class SalesTaxesJava {
 			BigDecimal t = new BigDecimal(sTax);
 			BigDecimal t2 = t.setScale(2, BigDecimal.ROUND_CEILING);
 			System.out.println("BD tax: " + t2);
+			
+			totalTaxes = t2;
+			
 			
 			t2 = t2.add(b2);
 			
@@ -45,18 +52,28 @@ public final class SalesTaxesJava {
 				BigDecimal t4 = t3.setScale(2, BigDecimal.ROUND_CEILING);
 				System.out.println("import tax: " + t4);
 				
+				totalTaxes = totalTaxes.add(t4);
+				
 				t4 = t4.add(t2);
 				System.out.println("Subtotal 2: " + t4);
 				
-				return t4.doubleValue();
+				bd[0] = totalTaxes;
+				bd[1] = t4;
+				
+				System.out.println("total taxes: " + bd[0]);
+				System.out.println("subtotal: " + bd[1]);
+				return bd;
 			}
 			
-			System.out.println("-------------------");
-			return t2.doubleValue();
+			bd[0] = totalTaxes;
+			bd[1] = t2;
+			System.out.println("total taxes: " + bd[0]);
+			System.out.println("subtotal: " + bd[1]);
+			return bd;
 		}
 		
 		else {
-			return 0.00;
+			return bd;
 		}
 	}
 }
