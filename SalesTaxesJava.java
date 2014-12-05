@@ -31,6 +31,27 @@ public final class SalesTaxesJava {
 			
 			System.out.println("BD subtotal: " + t2);
 			
+			
+			/* See if item is imported or not */
+			Pattern p2 = Pattern.compile("import[A-Za-z]*\\s");
+			Matcher m2 = p2.matcher(item);
+			
+			if (m2.find()) {
+				System.out.println(m2.group());
+				
+				double iTax = (amount * importTax) / 100.0;
+				
+				BigDecimal t3 = new BigDecimal(iTax);
+				BigDecimal t4 = t3.setScale(2, BigDecimal.ROUND_CEILING);
+				System.out.println("import tax: " + t4);
+				
+				t4 = t4.add(t2);
+				System.out.println("Subtotal 2: " + t4);
+				
+				return t4.doubleValue();
+			}
+			
+			System.out.println("-------------------");
 			return t2.doubleValue();
 		}
 		

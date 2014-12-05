@@ -29,7 +29,8 @@ public class TestSalesTaxesJava {
 	
 	@Test
 	public void testOneItemImport() {
-		
+		String oneItem = "1 imported bottle of perfume at 27.99";
+		Assert.assertEquals(SalesTaxesJava.calculateItem(oneItem), 32.19, 0.00);
 	}
 	
 	@Test
