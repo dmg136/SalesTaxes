@@ -66,10 +66,10 @@ public class TestSalesTaxes {
 	public void testOneItemImport() {
 		System.out.println("testOneItemImport");
 		String oneItem = "1 imported bottle of perfume at 27.99";
-		BigDecimal[] bd = SalesTaxes.calculateItem(oneItem);
+		Receipt r1 = new Receipt(oneItem);
 		
-		Assert.assertEquals(bd[0].doubleValue(), 4.20, 0.00);
-		Assert.assertEquals(bd[1].doubleValue(), 32.19, 0.00);
+		Assert.assertEquals(r1.getTaxes().doubleValue(), 4.20, 0.00);
+		Assert.assertEquals(r1.getAmount().doubleValue(), 32.19, 0.00);
 	}
 	
 	@Test

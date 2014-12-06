@@ -7,7 +7,7 @@ public final class SalesTaxes {
 	static int salesTax = 10;
 	static int importTax = 5;
 	
-	public static BigDecimal[] calculateItem(String item) {
+	public static BigDecimal[] calculateItem(String item, boolean isExempt) {
 		
 		System.out.println("==================");
 		

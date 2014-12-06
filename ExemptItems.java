@@ -8,5 +8,8 @@ public final class ExemptItems {
 		exemptItems.add("book");
 		exemptItems.add("food");
 		exemptItems.add("medical");
+		exemptItems.add("chocolate");
+		exemptItems.add("headache");
+		exemptItems.add("pills");
 	}
 }
